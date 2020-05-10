@@ -4,6 +4,12 @@
         xmlns:tools="http://schemas.android.com/tools"
        >
 
+    <data>
+        <variable
+                name="vm"
+                type="com.tmastro.canadago.game.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/game_layout"
             android:layout_width="match_parent"
