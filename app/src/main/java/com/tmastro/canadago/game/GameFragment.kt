@@ -30,9 +30,7 @@ class GameFragment : Fragment() {
             false
         )
         binding.resetButton.setOnClickListener { onReset() }
-
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-
         return binding.root
     }
 
