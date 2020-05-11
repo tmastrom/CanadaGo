@@ -20,7 +20,8 @@ class GameViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var currentItem = MutableLiveData<DataItem?>()
-    private val items = database.getAllItems()
+
+    val items = database.getAllItems()
 
     val itemsString = Transformations.map(items) {items ->
         formatItem(items, application.resources)
