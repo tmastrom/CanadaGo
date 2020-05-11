@@ -26,8 +26,6 @@ class GameFragment : Fragment() {
             container,
             false
         )
-        // Add listener to the button
-        binding.resetButton.setOnClickListener { onReset() }
 
         val application = requireNotNull(this.activity).application
         val dataSource = AnimalDatabase.getInstance(application).databaseDao
@@ -37,9 +35,5 @@ class GameFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         return binding.root
-    }
-
-    private fun onReset() {
-        Log.i("GameFragment", "onReset")
     }
 }
