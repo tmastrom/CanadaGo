@@ -13,7 +13,7 @@ fun formatItem(items: List<DataItem>, resources: Resources): Spanned {
         append(resources.getString(R.string.title))
         items.forEach {
             append("<br>")
-            append(resources.getString(R.string.start_time))
+            append(it.name)
             }
 
     }

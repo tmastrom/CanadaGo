@@ -23,7 +23,7 @@ abstract class AnimalDatabase : RoomDatabase() {
                         context.applicationContext,
                         AnimalDatabase::class.java,
                         "animals_canada_database"
-                    )
+                    ).createFromAsset("databases/animals_canada.db")
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

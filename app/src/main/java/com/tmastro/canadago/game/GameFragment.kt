@@ -32,7 +32,7 @@ class GameFragment : Fragment() {
         val viewModelFactory = GameViewModelFactory(dataSource, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(GameViewModel::class.java)
         binding.vm = viewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         return binding.root
     }
