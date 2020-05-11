@@ -28,7 +28,7 @@ class GameFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-        val dataSource = AnimalDatabase.getInstance(application).databaseDao
+        val dataSource = AnimalDatabase.getInstance(application).databaseDao()
         val viewModelFactory = GameViewModelFactory(dataSource, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(GameViewModel::class.java)
         binding.vm = viewModel

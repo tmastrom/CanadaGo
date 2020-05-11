@@ -16,7 +16,7 @@ interface DatabaseDao {
     fun update(item: DataItem)
 
     @Query("SELECT * from animals_canada_table WHERE id = :key")
-    fun get(key: Long): DataItem?
+    fun get(key: Int): DataItem?
 
     @Query("DELETE FROM animals_canada_table")
     fun clear()
@@ -26,6 +26,9 @@ interface DatabaseDao {
 
     @Query("SELECT * FROM animals_canada_table ORDER BY id DESC")
     fun getAllItems(): LiveData<List<DataItem>>
+
+    @Insert
+    fun insertData(data: List<DataItem>)
 
     //@Query("SELECT * FROM animals_canada_table WHERE is_found = FALSE")
     //@Query("SELECT * FROM animals_canada_table WHERE is_found = TRUE")

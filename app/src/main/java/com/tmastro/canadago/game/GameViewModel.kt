@@ -49,10 +49,9 @@ class GameViewModel(
 
     fun onCreateItem() {
         uiScope.launch {
-            val newItem = DataItem()
+            val newItem = DataItem(0,"sample", 0)
             insert(newItem)
             currentItem.value = getCurrentItemFromDb()
-
         }
     }
 
