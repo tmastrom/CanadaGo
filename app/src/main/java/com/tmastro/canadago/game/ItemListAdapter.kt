@@ -1,16 +1,14 @@
 package com.tmastro.canadago.game
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmastro.canadago.R
 import com.tmastro.canadago.database.DataItem
+import com.tmastro.canadago.databinding.ListItemAnimalBinding
 
 class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
 
@@ -25,16 +23,17 @@ class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemLi
 
     }
 
-    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.findViewById(R.id.animal_name)
-        val isFound: TextView = itemView.findViewById(R.id.is_found)
-        val img: ImageView = itemView.findViewById(R.id.animal_image)
+    class ViewHolder private constructor(val binding: ListItemAnimalBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: DataItem) {
-            val res = itemView.context.resources
-            name.text = item.name
-            isFound.text = item.isFound.toString()
-            img.setImageResource(
+            //val res = itemView.context.resources
+            binding.animalName.text = item.name
+            binding.isFound.text = when(item.isFound) {
+                0 -> "Not Found"
+                1 -> "Found"
+                else -> "Not Found"
+            }
+            binding.animalImage.setImageResource(
                 when (item.name) {
                     "Beaver" -> R.drawable.ic_pets_black_24dp
                     "Goose" -> R.drawable.ic_pets_black_24dp
@@ -47,9 +46,9 @@ class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemLi
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view =
-                    layoutInflater.inflate(R.layout.list_item_animal, parent, false)
-                return ViewHolder(view)
+                val binding = ListItemAnimalBinding.inflate(layoutInflater, parent, false)
+                //val view = layoutInflater.inflate(R.layout.list_item_animal, parent, false)
+                return ViewHolder(binding)
             }
         }
     }
