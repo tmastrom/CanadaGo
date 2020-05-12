@@ -15,6 +15,7 @@
             android:layout_height="wrap_content">
 
         <ImageView
+                app:animalImage="@{animal}"
                 android:id="@+id/animal_image"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 tools:srcCompat="@drawable/ic_pets_black_24dp" />
 
         <TextView
+                app:animalNameString="@{animal}"
                 android:id="@+id/animal_name"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
@@ -39,6 +41,7 @@
                 tools:text="Bear" />
 
         <TextView
+                app:isFoundString="@{animal}"
                 android:id="@+id/is_found"
                 android:layout_width="0dp"
                 android:layout_height="20dp"

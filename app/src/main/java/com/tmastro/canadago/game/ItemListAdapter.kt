@@ -20,27 +20,13 @@ class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemLi
         override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class ViewHolder private constructor(val binding: ListItemAnimalBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: DataItem) {
-            //val res = itemView.context.resources
-            binding.animalName.text = item.name
-            binding.isFound.text = when(item.isFound) {
-                0 -> "Not Found"
-                1 -> "Found"
-                else -> "Not Found"
-            }
-            binding.animalImage.setImageResource(
-                when (item.name) {
-                    "Beaver" -> R.drawable.ic_pets_black_24dp
-                    "Goose" -> R.drawable.ic_pets_black_24dp
-                    "Moose" -> R.drawable.ic_pets_black_24dp
-                    else -> R.drawable.ic_pets_black_24dp
-                }
-            )
+           binding.animal = item
+            binding.executePendingBindings()
         }
 
         companion object {
