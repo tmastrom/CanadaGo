@@ -4,12 +4,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmastro.canadago.R
 import com.tmastro.canadago.database.DataItem
 
-class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
+class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
+
+    class ItemListDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem == newItem
+        }
+
+    }
 
     class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
         val name: TextView = itemView.findViewById(R.id.animal_name)
@@ -25,7 +39,7 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
                     "Beaver" -> R.drawable.ic_pets_black_24dp
                     "Goose" -> R.drawable.ic_pets_black_24dp
                     "Moose" -> R.drawable.ic_pets_black_24dp
-                    else -> R.drawable.ic_launcher_foreground
+                    else -> R.drawable.ic_pets_black_24dp
                 }
             )
         }
@@ -40,17 +54,17 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
         }
     }
 
-    var data = listOf<DataItem>()
+/*    var data = listOf<DataItem>()
 
         set(value) {
         field = value
         notifyDataSetChanged()
-    }
+    }*/
 
-    override fun getItemCount() = data.size
+    //override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 

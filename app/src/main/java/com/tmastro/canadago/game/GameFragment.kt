@@ -38,7 +38,7 @@ class GameFragment : Fragment() {
         binding.itemList.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 

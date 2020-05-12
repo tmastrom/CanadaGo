@@ -65,13 +65,14 @@ class GameViewModel(
     fun onClear() {
         uiScope.launch {
             clear()
-            currentItem.value = null
+            //currentItem.value = null
         }
     }
 
     suspend fun clear() {
         withContext(Dispatchers.IO) {
-            database.clear()
+            //database.clear()
+            //Todo: set all isFound fields to 0
         }
     }
 
