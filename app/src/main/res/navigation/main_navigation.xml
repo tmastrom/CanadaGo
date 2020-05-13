@@ -17,6 +17,28 @@
             android:id="@+id/game_destination"
             tools:layout="@layout/game_fragment"
             android:name="com.tmastro.canadago.game.GameFragment"
-            android:label="game_fragment" />
+            android:label="game_fragment" >
+        <argument
+                android:name="itemKey"
+                app:argType="long" />
+        <action
+                android:id="@+id/action_game_destination_to_detailFragment"
+                app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/detailFragment"
+            tools:layout="@layout/fragment_item_detail"
+            android:name="com.tmastro.canadago.detail.DetailFragment"
+            android:label="DetailFragment" >
+        <argument
+                android:name="itemKey"
+                app:argType="long" />
+        <action
+                android:id="@+id/action_detailFragment_to_game_destination"
+                app:destination="@id/game_destination"
+                app:launchSingleTop="false"
+                app:popUpTo="@+id/game_destination"
+                app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

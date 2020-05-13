@@ -3,4 +3,5 @@
     <string name="title">YourDataHere</string>
     <string name="start_time"><![CDATA[![CDATA[<b>Start:</b>]]]]></string>
     <string name="id">id</string>
+    <string name="close">close</string>
 </resources>
