@@ -7,12 +7,16 @@
         <variable
                 name="animal"
                 type="com.tmastro.canadago.database.DataItem" />
+        <variable
+                name="clickListener"
+                type="com.tmastro.canadago.game.AnimalItemListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickListener.onClick(animal)}">
 
         <ImageView
                 app:animalImage="@{animal}"

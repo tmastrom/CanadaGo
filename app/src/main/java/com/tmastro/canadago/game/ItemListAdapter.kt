@@ -9,17 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tmastro.canadago.R
 import com.tmastro.canadago.database.DataItem
 import com.tmastro.canadago.databinding.ListItemAnimalBinding
+import com.tmastro.canadago.generated.callback.OnClickListener
 
 class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
 
-    class ItemListDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-            return oldItem.id == newItem.id
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+    }
 
-        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-            return oldItem == newItem
-        }
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor(val binding: ListItemAnimalBinding) : RecyclerView.ViewHolder(binding.root){
@@ -33,28 +34,23 @@ class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemLi
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemAnimalBinding.inflate(layoutInflater, parent, false)
-                //val view = layoutInflater.inflate(R.layout.list_item_animal, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
 
-/*    var data = listOf<DataItem>()
+}
 
-        set(value) {
-        field = value
-        notifyDataSetChanged()
-    }*/
-
-    //override fun getItemCount() = data.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+class ItemListDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        return oldItem == newItem
     }
+}
+
+class AnimalItemListener( val clickListener: (AnimalId : Long) -> Unit) {
+    fun onClick(item: DataItem) = clickListener(item.id)
 }

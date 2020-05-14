@@ -30,8 +30,8 @@ interface DatabaseDao {
     @Insert
     fun insertData(data: List<DataItem>)
 
-    @Query("SELECT * from animals_canada_table WHERE id = :itemKey")
-    fun getItemId(itemKey: Long): LiveData<DataItem>
+    @Query("SELECT * from animals_canada_table WHERE id = :key")
+    fun getItemId(key: Long): LiveData<DataItem>
 
     //@Query("SELECT * FROM animals_canada_table WHERE is_found = FALSE")
     //@Query("SELECT * FROM animals_canada_table WHERE is_found = TRUE")

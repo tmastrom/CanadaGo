@@ -8,7 +8,7 @@ import com.tmastro.canadago.database.DatabaseDao
 import kotlinx.coroutines.Job
 
 class DetailViewModel(
-    private val detailItemKey: Long = 0L,
+    detailItemKey: Long = 0L,
     dataSource: DatabaseDao) : ViewModel() {
 
     val database = dataSource
