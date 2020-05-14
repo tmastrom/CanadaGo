@@ -27,6 +27,19 @@ class GameViewModel(
         formatItem(items, application.resources)
     }
 
+    private val _navigateToDetail = MutableLiveData<Long>()
+    val navigateToDetail
+        get() = _navigateToDetail
+
+    fun onAnimalItemClicked(id: Long) {
+        _navigateToDetail.value = id
+    }
+
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
+    }
+
+
     init {
         Log.i("GameViewModel", "GameViewModel created")
         initializeCurrentItem()

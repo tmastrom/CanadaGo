@@ -34,7 +34,9 @@ class GameFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(GameViewModel::class.java)
         binding.vm = viewModel
 
-        val adapter = ItemListAdapter()
+        val adapter = ItemListAdapter(AnimalItemListener { itemId ->
+            viewModel.onAnimalItemClicked(itemId)
+        })
         binding.itemList.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner, Observer {
             it?.let {

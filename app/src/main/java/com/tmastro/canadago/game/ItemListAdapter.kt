@@ -6,16 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.tmastro.canadago.R
 import com.tmastro.canadago.database.DataItem
 import com.tmastro.canadago.databinding.ListItemAnimalBinding
-import com.tmastro.canadago.generated.callback.OnClickListener
 
-class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
+class ItemListAdapter(val clickListener: AnimalItemListener)
+    : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     override fun onCreateViewHolder(
@@ -25,8 +24,13 @@ class ItemListAdapter : ListAdapter<DataItem, ItemListAdapter.ViewHolder>(ItemLi
 
     class ViewHolder private constructor(val binding: ListItemAnimalBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: DataItem) {
-           binding.animal = item
+        fun bind(
+            item: DataItem,
+            clickListener: AnimalItemListener
+        ) {
+
+            binding.animal = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
