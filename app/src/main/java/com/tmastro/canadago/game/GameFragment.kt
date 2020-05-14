@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,7 +36,8 @@ class GameFragment : Fragment() {
         binding.vm = viewModel
 
         val adapter = ItemListAdapter(AnimalItemListener { itemId ->
-            viewModel.onAnimalItemClicked(itemId)
+            // viewModel.onAnimalItemClicked(itemId)
+            Toast.makeText(context, "${itemId}", Toast.LENGTH_LONG).show()
         })
         binding.itemList.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner, Observer {
