@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.tmastro.canadago.R
 import com.tmastro.canadago.database.AnimalDatabase
 import com.tmastro.canadago.databinding.GameFragmentBinding
@@ -38,6 +40,9 @@ class GameFragment : Fragment() {
         val adapter = ItemListAdapter(AnimalItemListener { itemId ->
             // viewModel.onAnimalItemClicked(itemId)
             Toast.makeText(context, "${itemId}", Toast.LENGTH_LONG).show()
+
+            viewModel.onAnimalItemClicked(itemId)
+
         })
         binding.itemList.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner, Observer {
@@ -47,6 +52,17 @@ class GameFragment : Fragment() {
         })
 
         binding.lifecycleOwner = this
+
+        viewModel.navigateToDetail.observe(this, Observer {item ->
+            item?.let {
+                this.findNavController().navigate(
+                    GameFragmentDirections.actionGameDestinationToDetailFragment(item))
+                viewModel.onDetailNavigated()
+            }
+        })
+
+        //Todo: is layout manager necessary
+        // binding.itemList.layoutManager = manager
 
         return binding.root
     }

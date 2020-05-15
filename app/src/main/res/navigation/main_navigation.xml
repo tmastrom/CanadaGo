@@ -6,9 +6,10 @@
         app:startDestination="@id/title_destination">
 
     <fragment
-        android:id="@+id/title_destination"
+            android:id="@+id/title_destination"
             tools:layout="@layout/title_fragment"
-        android:name="com.tmastro.canadago.title.TitleFragment">
+            android:name="com.tmastro.canadago.title.TitleFragment">
+
         <action
                 android:id="@+id/action_title_destination_to_gameFragment"
                 app:destination="@id/game_destination" />
