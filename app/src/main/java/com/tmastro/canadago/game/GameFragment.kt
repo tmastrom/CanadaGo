@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -18,7 +20,7 @@ import com.tmastro.canadago.R
 import com.tmastro.canadago.database.AnimalDatabase
 import com.tmastro.canadago.databinding.GameFragmentBinding
 
-class GameFragment : Fragment() {
+class GameFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,7 @@ class GameFragment : Fragment() {
         binding.vm = viewModel
 
 
+        // set spinner options from array resource
         context?.let {
             ArrayAdapter.createFromResource(
                 it,
@@ -52,6 +55,7 @@ class GameFragment : Fragment() {
             }
         }
 
+        binding.spinner.onItemSelectedListener = this
 
 
         val adapter = ItemListAdapter(AnimalItemListener { itemId ->
@@ -79,5 +83,17 @@ class GameFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Log.i("GAMEFRAGMENT", "SELECTED: " + position.toString())
+                // position 0 = All
+        //          1 = found
+        //          2 = !found
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        Log.i("GAMEFRAGMENT", "Nothing S")
     }
 }
