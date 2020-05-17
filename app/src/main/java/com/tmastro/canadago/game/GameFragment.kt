@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -37,6 +39,21 @@ class GameFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(GameViewModel::class.java)
         binding.vm = viewModel
 
+
+        context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.spinner_array,
+                android.R.layout.simple_spinner_dropdown_item
+            ).also {
+                adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinner.adapter = adapter
+            }
+        }
+
+
+
         val adapter = ItemListAdapter(AnimalItemListener { itemId ->
             // viewModel.onAnimalItemClicked(itemId)
             Toast.makeText(context, "${itemId}", Toast.LENGTH_LONG).show()
@@ -53,16 +70,13 @@ class GameFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        viewModel.navigateToDetail.observe(this, Observer {item ->
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {item ->
             item?.let {
                 this.findNavController().navigate(
                     GameFragmentDirections.actionGameDestinationToDetailFragment(item))
                 viewModel.onDetailNavigated()
             }
         })
-
-        //Todo: is layout manager necessary
-        // binding.itemList.layoutManager = manager
 
         return binding.root
     }

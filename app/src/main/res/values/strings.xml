@@ -4,4 +4,11 @@
     <string name="start_time"><![CDATA[![CDATA[<b>Start:</b>]]]]></string>
     <string name="id">id</string>
     <string name="close">close</string>
+
+    <string-array name="spinner_array">
+        <item>All</item>
+        <item>Found</item>
+        <item>Not Found</item>
+    </string-array>
+
 </resources>
