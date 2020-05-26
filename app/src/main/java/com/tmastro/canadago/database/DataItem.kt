@@ -13,5 +13,5 @@ data class DataItem (
     val name: String = "",
 
     @ColumnInfo(name = "is_found")
-    val isFound: Int = 0
+    var isFound: Int = 0
 )
